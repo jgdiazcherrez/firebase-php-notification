@@ -295,9 +295,7 @@ abstract class CommonApp implements Executor
 	{
 		$messages = $this->_chunkMessage($bulkMessage);
 		foreach ($messages as $message) {
-		    var_dump($message);
-		    die;
-			//$this->_dispatcher->sendNotification($message);
+			$this->_dispatcher->sendNotification($message);
 		}
 	}
 
