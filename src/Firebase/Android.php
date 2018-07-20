@@ -19,7 +19,6 @@ class Android extends CommonApp
 			'priority' => 'high',
 			"content_available" => true,
 			"data" => [
-				'provider' => 'firebase',
 				'deepLinking' => $this->getUrl(),
 				'image' => $this->getImageUrl(),
 				'title' => $this->getTitle(),

@@ -2,8 +2,8 @@
 
 namespace Notification\Firebase;
 
-use Notification\Exception\AppException;
-use Notification\Exception\DispatchException;
+use Notification\Firebase\Exception\AppException;
+use Notification\Firebase\Exception\DispatchException;
 use Notification\Firebase\Assert\JSON;
 
 /**
@@ -51,10 +51,10 @@ class Dispatcher
      * @return string
      * @throws AppException
      * @throws DispatchException
-     * @throws DispatchException|\Notification\Exception\JSONException
+     * @throws DispatchException|\Notification\Firebase\Exception\JSONException
      */
 	public function sendNotification($message)
-	{
+    {
 		if (!$this->_authorization) {
 			throw new DispatchException(DispatchException::NOT_TOKEN_AUTHORIZATION_INCLUDED);
 		}
@@ -91,7 +91,7 @@ class Dispatcher
 	/**
 	 * Retrieve the firebase message
 	 * @param $message
-     * @throws DispatchException|\Notification\Exception\JSONException
+     * @throws DispatchException|\Notification\Firebase\Exception\JSONException
 	 * @return array
 	 */
 	private function _retrieveFireBaseMessage($message)
@@ -109,7 +109,7 @@ class Dispatcher
      * Assert the message
      * @param $message
      * @param $messageDecoded
-     * @throws \Notification\Exception\JSONException
+     * @throws \Notification\Firebase\Exception\JSONException
      */
 	private function _commonType($message, &$messageDecoded)
 	{

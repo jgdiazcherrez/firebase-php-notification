@@ -8,7 +8,7 @@
 
 
 namespace Notification\Firebase\Assert;
-use Notification\Exception\JSONException;
+use Notification\Firebase\Exception\JSONException;
 
 /**
  * Class JSON

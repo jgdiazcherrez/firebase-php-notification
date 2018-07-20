@@ -2,7 +2,7 @@
 
 namespace Notification\Firebase;
 
-use Notification\Exception\ConditionException;
+use Notification\Firebase\Exception\ConditionException;
 
 /**
  * It compose the string condition depending the operator, topics and considering its limitations

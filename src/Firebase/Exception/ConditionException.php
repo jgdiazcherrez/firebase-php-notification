@@ -1,7 +1,6 @@
 <?php
 
-namespace Notification\Exception;
-
+namespace Notification\Firebase\Exception;
 /**
  * Class ConditionException
  * @package Notification\Exception

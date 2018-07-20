@@ -12,7 +12,6 @@ use Notification\Firebase\Dispatcher;
 class Facade
 {
 
-
 	/**
 	 * IOS Notificator
 	 * @var IOS
@@ -43,25 +42,25 @@ class Facade
 	 * @param string $imgUrl
      * @param array $topics
      * @param array $mainTopics
-     * @throws Exception\AppException
+     * @throws \Notification\Firebase\Exception\AppException
 	 */
 	public function sendNotification($title, $text, $url, $imgUrl, $topics, $mainTopics)
 	{
-        $this->_sendNotifyIOS(func_get_args());
-        $this->_sendNotifyAndroid(func_get_args());
+        $this->_sendNotificationToIOS(func_get_args());
+        $this->_sendNotificationToAndroid(func_get_args());
 	}
 
 
     /**
-     * Send Notify for IOS
+     * Send Notification for IOS
      * @param string $title
      * @param string $text
      * @param string $url
      * @param string $imgUrl
      * @param array $topics
-     * @throws Exception\AppException
+     * @throws \Notification\Firebase\Exception\AppException
      */
-	protected function _sendNotifyIOS($title, $text, $url, $imgUrl, $topics, $mainTopics)
+	protected function _sendNotificationToIOS($title, $text, $url, $imgUrl, $topics, $mainTopics)
     {
         $this->_iosNotificator
             ->setTitle($title)
@@ -74,16 +73,16 @@ class Facade
     }
 
 	/**
-	 * Notify for Android
+	 * Send Notification for Android
 	 * @param string $title
 	 * @param string $text
 	 * @param string $url
 	 * @param string $imgUrl
 	 * @param array $topics
      * @param array $mainTopics
-     * @throws Exception\AppException
+     * @throws \Notification\Firebase\Exception\AppException
 	 */
-	protected function _sendNotifyAndroid($title, $text, $url, $imgUrl, $topics, $mainTopics)
+	protected function _sendNotificationToAndroid($title, $text, $url, $imgUrl, $topics, $mainTopics)
 	{
         $this->_androidNotificator
                 ->setTitle($title)

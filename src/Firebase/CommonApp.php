@@ -3,14 +3,14 @@
 
 namespace Notification\Firebase;
 
-use Notification\Exception\AppException;
-use Notification\ExecutorApp;
+use Notification\Firebase\Exception\AppException;
+use Notification\Executor;
 
 /**
  * Abstract Common App
  * @author Jonathan Díaz <jgdiazcherrez@gmail.com>
  */
-abstract class CommonApp implements ExecutorApp
+abstract class CommonApp implements Executor
 {
 
 	/**
@@ -228,7 +228,7 @@ abstract class CommonApp implements ExecutorApp
     /**
      * Send Ios Notification
      * @return bool
-     * @throws \Notification\Exception\AppException
+     * @throws \Notification\Firebase\Exception\AppException
      */
     public function send(): bool
     {
@@ -269,7 +269,7 @@ abstract class CommonApp implements ExecutorApp
     /**
      * Chunk message for firebase limitations
      * @param $bulkMessage
-     * @throws \Notification\Exception\ConditionException
+     * @throws \Notification\Firebase\Exception\ConditionException
      * @return array
      */
 	protected function _chunkMessage($bulkMessage) : array
@@ -288,20 +288,22 @@ abstract class CommonApp implements ExecutorApp
      * Send All notifications
      * @param $bulkMessage
      * @throws AppException
-     * @throws \Notification\Exception\DispatchException
-     * @throws \Notification\Exception\JSONException
+     * @throws \Notification\Firebase\Exception\DispatchException
+     * @throws \Notification\Firebase\Exception\JSONException
      */
 	protected function _sendAllNotifications($bulkMessage)
 	{
 		$messages = $this->_chunkMessage($bulkMessage);
 		foreach ($messages as $message) {
-			$this->_dispatcher->sendNotification($message);
+		    var_dump($message);
+		    die;
+			//$this->_dispatcher->sendNotification($message);
 		}
 	}
 
 	/**
 	 * Retrieve topic condition with the main condition
-     * @throws \Notification\Exception\ConditionException
+     * @throws \Notification\Firebase\Exception\ConditionException
 	 * @return string
 	 */
 	protected function _retrieveCondition() :string
@@ -320,7 +322,7 @@ abstract class CommonApp implements ExecutorApp
      * It uses the firebase condition class to compose the string condition
      * @param $topics
      * @param string $operator
-     * @throws \Notification\Exception\ConditionException
+     * @throws \Notification\Firebase\Exception\ConditionException
      * @return string
      */
 	protected function _getCondition($topics, $operator = Condition::AND_CONDITION) : string
