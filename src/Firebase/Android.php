@@ -15,7 +15,7 @@ class Android extends CommonApp
 	 */
 	protected function _retrieveMessage():array
 	{
-		return ($this->_messageData) ? $this->_messageData : [
+		return [
 			'priority' => 'high',
 			"content_available" => true,
 			"data" => [

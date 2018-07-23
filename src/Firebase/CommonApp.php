@@ -62,6 +62,32 @@ abstract class CommonApp implements Executor
      */
 	protected $_messageData;
 
+    /**
+     * Specific Ids
+     * @var array
+     */
+	protected $_registrationIds;
+
+    /**
+     * Setter Registration Ids
+     * @param array $ids
+     * @return $this
+     */
+	public function setRegistrationIds(array $ids){
+	    $this->_registrationIds = $ids;
+	    return $this;
+    }
+
+
+    /**
+     * Getter Registration Ids
+     * @return array
+     */
+    public function getRegistrationIds()
+    {
+        return $this->_registrationIds;
+    }
+
 
     /**
      * Setter Message
@@ -298,6 +324,22 @@ abstract class CommonApp implements Executor
 			$this->_dispatcher->sendNotification($message);
 		}
 	}
+
+    /**
+     * Get the target. It can be a custom message, a topics or a list of device identifier
+     */
+	protected function _getTarget()
+    {
+       $fcmMessage = $this->_retrieveMessage();
+       if($this->_messageData){
+           return $this->_messageData;
+       }
+       if(count($this->_registrationIds)){
+           unset($fcmMessage['condition']);
+           $fcmMessage['registration_ids'] = $this->_registrationIds;
+       }
+       return $fcmMessage;
+    }
 
 	/**
 	 * Retrieve topic condition with the main condition

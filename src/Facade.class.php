@@ -42,9 +42,10 @@ class Facade
 	 * @param string $imgUrl
      * @param array $topics
      * @param array $mainTopics
+     * @param array $idsDevices
      * @throws \Notification\Firebase\Exception\AppException
 	 */
-	public function sendNotification($title, $text, $url, $imgUrl, $topics, $mainTopics)
+	public function sendNotification($title, $text, $url, $imgUrl, $topics = [], $mainTopics = [], $idsDevices = [])
 	{
         $this->_sendNotificationToIOS(func_get_args());
         $this->_sendNotificationToAndroid(func_get_args());
@@ -60,7 +61,7 @@ class Facade
      * @param array $topics
      * @throws \Notification\Firebase\Exception\AppException
      */
-	protected function _sendNotificationToIOS($title, $text, $url, $imgUrl, $topics, $mainTopics)
+	protected function _sendNotificationToIOS($title, $text, $url, $imgUrl, $topics, $mainTopics, $idsDevices)
     {
         $this->_iosNotificator
             ->setTitle($title)
@@ -69,6 +70,7 @@ class Facade
             ->setMainTopics($mainTopics)
             ->setImageUrl($imgUrl)
             ->setTopics($topics)
+            ->setRegistrationIds($idsDevices)
             ->send();
     }
 
@@ -82,7 +84,7 @@ class Facade
      * @param array $mainTopics
      * @throws \Notification\Firebase\Exception\AppException
 	 */
-	protected function _sendNotificationToAndroid($title, $text, $url, $imgUrl, $topics, $mainTopics)
+	protected function _sendNotificationToAndroid($title, $text, $url, $imgUrl, $topics, $mainTopics, $idsDevices)
 	{
         $this->_androidNotificator
                 ->setTitle($title)
@@ -91,6 +93,7 @@ class Facade
                 ->setMainTopics($mainTopics)
                 ->setImageUrl($imgUrl)
                 ->setTopics($topics)
+                ->setRegistrationIds($idsDevices)
                 ->send();
 	}
 
