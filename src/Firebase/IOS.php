@@ -15,8 +15,8 @@ class IOS extends CommonApp
 	protected function _retrieveMessage() : array
 	{
 		return [
-			'priority' => 'high',
-			"content_available" => true,
+			'priority' => $this->getPriority(),
+			"content_available" => $this->getContentAvailable(),
 			"data" => [
 				"deepLinking" => $this->getUrl(),
 				'imgUrl' => $this->getImageUrl()
@@ -24,7 +24,7 @@ class IOS extends CommonApp
 			"notification" => [
 				"title" => $this->getTitle(),
 				"body" => $this->getBody(),
-				"badge" => 0
+				"badge" => $this->getBadge()
 			],
 			"condition" => ''
 		];

@@ -16,8 +16,8 @@ class Android extends CommonApp
 	protected function _retrieveMessage():array
 	{
 		return [
-			'priority' => 'high',
-			"content_available" => true,
+			'priority' => $this->getPriority(),
+			"content_available" => $this->getContentAvailable(),
 			"data" => [
 				'deepLinking' => $this->getUrl(),
 				'image' => $this->getImageUrl(),

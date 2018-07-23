@@ -13,6 +13,16 @@ use Notification\Executor;
 abstract class CommonApp implements Executor
 {
 
+    const HIGH_PRIORITY = 'high';
+    const NORMAL_PRIORITY= 'normal';
+    /**
+     * Define the priorities
+     */
+    const ALLOW_PRIORITIES = [
+        self::HIGH_PRIORITY
+        ,self::NORMAL_PRIORITY
+    ];
+
 	/**
 	 * Title
 	 * @var string
@@ -67,6 +77,88 @@ abstract class CommonApp implements Executor
      * @var array
      */
 	protected $_registrationIds;
+
+    /**
+     * Priority Message
+     * @var string
+     */
+	protected $_priority;
+
+    /**
+     * Badge Parameter
+     * @var int
+     */
+	protected $_badge;
+
+    /**
+     * Content Available Flag
+     * @var boolean
+     */
+	protected $_contentAvailable;
+
+
+    /**
+     * Setter Content Available
+     * @param string $contentAvailable
+     * @return $this
+     */
+	public function setContentAvailable(string $contentAvailable)
+    {
+        $this->_contentAvailable = $contentAvailable;
+        return $this;
+    }
+
+    /**
+     * Getter Content Available
+     * @return bool
+     */
+	public function getContentAvailable(){
+	    return $this->_contentAvailable;
+    }
+
+    /**
+     * Setter Badge
+     * @param int $badge
+     * @return $this
+     */
+	public function setBadge(int $badge){
+	    $this->_badge = $badge;
+	    return $this;
+    }
+
+    /**
+     * Getter Badge
+     * @return int
+     */
+	public function getBadge()
+    {
+        return $this->_badge;
+    }
+
+
+    /**
+     * Getter Priority
+     * @return string
+     */
+    public function getPriority()
+    {
+        return $this->_priority;
+    }
+
+    /**
+     * Setter Priority
+     * @param string $priority
+     * @throws AppException
+     * @return $this
+     */
+	public function setPriority(string $priority)
+    {
+        if(!in_array($priority, self::ALLOW_PRIORITIES)){
+            throw new AppException(AppException::PRIORITY_NOT_ALLOWED);
+        }
+        $this->_priority = $priority;
+        return $this;
+    }
 
     /**
      * Setter Registration Ids
@@ -249,6 +341,10 @@ abstract class CommonApp implements Executor
 		$this->_dispatcher = $dispatcher;
 		$this->_mainTopics = [];
 		$this->_topics = [];
+		$this->_registrationIds = [];
+		$this->_priority = self::NORMAL_PRIORITY;
+		$this->_contentAvailable = true;
+		$this->_badge = 0;
 	}
 
     /**
