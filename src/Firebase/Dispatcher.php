@@ -80,8 +80,6 @@ class Dispatcher
 			$result = curl_exec($ch);
 			curl_close($ch);
 			return $result;
-		} catch (AppException $ex) {
-			throw $ex;
 		}
 		catch(\Exception $ex){
             throw new AppException(AppException::UNEXPECTED_ERROR . ': ' . $ex->getMessage());
